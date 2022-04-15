@@ -14,7 +14,7 @@ def song_find(key):
                 return sheet.cell(row_count, 1).value   #Retuen the original name, which in the first column.
             elif cell.value == None:
                 break
-    return key #When song no found, return the original search key for the original search engine.
+    return False #When song no found, return the original search key for the original search engine.
 
 def alter_add(new, exist, qqid):
     #You need 3 arguement, new name, exisied name, and the uploader's QQID
@@ -30,9 +30,9 @@ def alter_add(new, exist, qqid):
                         comment.height = 10
                         sheet.cell(cell.row, cell.column+1).comment = comment #Add uploader's QQID as comment
                         book.save('song_alter_test.xlsx')
-                        return 'added'     #add alternative name
+                        return '已添加，请输入/search 歌曲名 查看'     #add alternative name
                     elif sheet.cell(cell.row, cell.column+1).value == new:
-                        return "already in library"   #Check for existing alternative name
+                        return "该别名已存在库中"   #Check for existing alternative name
             elif cell.value == None:
                 break
-    return 'song no found'   #when no song found
+    return '歌曲未找到，请确定格式为 /add 旧名称|||新名称'   #when no song found
